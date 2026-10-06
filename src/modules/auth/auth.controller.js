@@ -1,6 +1,7 @@
 import { Router } from "express";
 import{sighup,signin,getUserById} from "./auth.service.js"
-import { auth } from "../../common/service/token.service.js";
+import { auth } from "../../common/middleware/index.js";
+import {gnreateAccessToken} from "./auth.service.js"
 const router = Router()
 
 
@@ -19,8 +20,9 @@ router.get("/get-user-by-id",auth,async(req,res)=>{
     let data = await getUserById(req.user.id)
     res.json(data)
 })
-
-
-
+router.post("/gnreate-new-access-token",async(req,res)=>{
+    let accesstoken = await gnreateAccessToken(req.body)
+    res.json(accesstoken)
+})
 
 export default router

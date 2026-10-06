@@ -4,7 +4,8 @@ import {genrateHash,genrateCompare,genrateargon2verifiy} from "../../common/serv
 import * as argon2 from "argon2"
 import jwt from "jsonwebtoken"
 import { BadRequestException, ConflictException, NotFoundException, SuccssException } from "../../common/exciptions/error.exciption.js"
-
+import{gnerateToken} from "../../common/service/token.service.js"
+import{gnerateNewAccessToken} from "../../common/service/token.service.js"
 
 
 
@@ -42,8 +43,9 @@ if(!userData){
 }
 let comparePassword = await genrateargon2verifiy({plainText:password,hashedText:userData.password})
 if(comparePassword){
-    let token = jwt.sign({id:userData._id},"route")
-    return ({message:"login succssfully",token})
+    let {accesstoken,refereshtoken}= gnerateToken(userData)
+
+    return ({message:"login succssfully",accesstoken,refereshtoken})
 }else{
     return BadRequestException({message:"password not match"})
 }
@@ -52,4 +54,13 @@ export const getUserById = async(id)=>{
     let userdata = await userModel.findById(id)
     return userdata
 
+}
+export const gnreateAccessToken = async(body)=>{
+    let {refereshtoken} = body
+    let{accesstoken} =gnerateNewAccessToken(refereshtoken)
+    if(accesstoken){
+        return {accesstoken}
+    }else{
+        throw BadRequestException({message:"invalid token"})
+    }
 }
