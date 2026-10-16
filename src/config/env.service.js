@@ -11,7 +11,8 @@ let UserSignature = process.env.USER_SIGNATURE
 let userRefreshSignature =process.env.USER_REFRESH_SIGNATURE
 let adminSignature = process.env.ADMIN_SIGNATURE
 let adminRefreshSignature = process.env.ADMIN_REFRESH_SIGNATURE
-
+let email = process.env.EMIL
+let appPassword =process.env.APP_BASSWORD
 
 export const env = {
     port , 
@@ -21,5 +22,7 @@ export const env = {
     UserSignature,
    userRefreshSignature,
    adminSignature,
-   adminRefreshSignature
+   adminRefreshSignature,
+   email,
+   appPassword
 }

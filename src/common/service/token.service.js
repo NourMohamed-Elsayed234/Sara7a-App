@@ -31,24 +31,6 @@ let accesstoken = jwt.sign({id:decodeRefreashToken.id},signature,{expiresIn:"30m
  
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const gnerateToken =(user)=>{
 console.log(user)
 let signature

@@ -1,5 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 import { genderEnum, providerEnum, roleEmum } from "../common/index.js";
+import { string } from "zod";
 
 
 export const userSchema = Schema({
@@ -48,6 +49,9 @@ export const userSchema = Schema({
     isverified:{
         type:Boolean,
         default:false
+    },
+    otp:{
+        type:String
     }
     
 },
